@@ -1,16 +1,26 @@
+using Loja_Manoel.Middlewares;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
+
+using Loja_Manoel.RoutingConventions;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    // Adiciona prefixo "v1" para todas as rotas
+    options.Conventions.Insert(0, new RoutePrefixConvention(new AttributeRouteModel(new RouteAttribute("v1"))));
+});
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Middleware para redirecionar todas as URLs para seus equivalentes em minúsculas
+app.UseLowercaseUrls();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
