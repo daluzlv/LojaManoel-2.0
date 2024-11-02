@@ -1,0 +1,6 @@
+﻿services:
+  loja manoellojamanoel:
+    image: loja manoellojamanoel
+    build:
+      context: .
+      dockerfile: Loja Manoel/Dockerfile

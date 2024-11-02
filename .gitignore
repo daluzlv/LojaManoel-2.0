@@ -1,0 +1,117 @@
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Enable "untracking" of files already tracked, but still allow them to be updated in the repository
+!*.htm
+!*.html
+!*.css
+!*.js.txt
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Unix
+*.swp
+*.swo
+.*.s[a-w][a-z]
+.*.un~
+*.nfs*
+._*
+
+# Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# -- NDA specific skips --
+*.pdf
+*.xls?
+
+# Rider
+.idea/
+*.sln.iml
+*.sln.docstates
+*.sonarlint/
+
+# Rider Files
+.idea/workspace.xml 
+
+# VS Code
+.vscode/
+
+# Config folder
+Properties/
+
+# dotnet user secrets
+**/secrets.json
+
+# Backup & report extension files
+*.bak
+*.access
+*.mdb
+
+# SQL extension files
+*.mdf
+*.ldf
+*.ndf
+
+# PyCharm & IntelliJ project files
+.idea
+.ipynb_checkpoints/
+
+# Python-specific skips
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.python-develop-lib/
+
+# Virtualenv
+venv/
+ENV/
+.env/
+env.bak/
+.env.bak/
+
+# Log files
+*.log
+.logs/
+!keep/.gitkeep
+
+# npm
+node_modules/
+
+# Cache files
+*.cache
+
+# UMI Studio Data
+*.bak
