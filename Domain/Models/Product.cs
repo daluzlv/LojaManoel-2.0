@@ -1,7 +1,8 @@
 ﻿namespace Domain;
 
-public class Product(int length, int height, int width)
+public class Product(string productId, int length, int height, int width)
 {
+    public string ProductId { get; private set; } = productId;
     public int Length { get; private set; } = length;
     public int Height { get; private set; } = height;
     public int Width { get; private set; } = width;

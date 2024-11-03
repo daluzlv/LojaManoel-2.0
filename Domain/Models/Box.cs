@@ -1,32 +1,22 @@
 ﻿namespace Domain.Models;
 
-public class BoxSpace
+public class BoxSpace(int length, int width, int height)
 {
-    public int Length { get; set; }
-    public int Width { get; set; }
-    public int Height { get; set; }
-
-    public BoxSpace(int length, int width, int height)
-    {
-        Length = length;
-        Width = width;
-        Height = height;
-    }
+    public int Length { get; set; } = length;
+    public int Width { get; set; } = width;
+    public int Height { get; set; } = height;
 }
 
-public class Box
+public class Box(string? boxId, int length, int width, int height, List<Product>? products = null)
 {
-    private readonly List<BoxSpace> _availableSpace;
-    private readonly List<Product> _products;
+    private readonly List<BoxSpace> _availableSpace = [new BoxSpace(length, width, height)];
+    public string? BoxId { get; set; } = boxId;
+    public List<Product> Products { get; set; }  = products ?? [];
+    private string? _observation = null;
     public int Volume => _availableSpace.Sum(a => a.Height * a.Width * a.Length);
 
-    public Box(int length, int width, int height, List<Product>? products = null)
-    {
-        _availableSpace = [new BoxSpace(length, width, height)];
-        _products = products ?? [];
-    }
+    public void AddObservation(string observation) => _observation = observation;
 
-    
     public bool AddProduct(Product product)
     {
         var productRotations = product.GetRotations();
@@ -36,7 +26,7 @@ public class Box
             {
                 if (!FitsInSpace(availableSpace, rotatedLength, rotatedWidth, rotatedHeight)) continue;
                 
-                _products.Add(product);
+                Products.Add(product);
                 UpdateAvailableSpace(availableSpace, product);
                 return true;
             }

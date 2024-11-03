@@ -1,17 +1,9 @@
 ﻿namespace Domain.Models;
 
-public class User
+public class User(Guid id, string username, string password, string role)
 {
-    public Guid Id { get; set; }
-    public string Username { get; set; }
-    public string Password { get; set; }
-    public string Role { get; set; }
-
-    public User(Guid id, string username, string password, string role)
-    {
-        Id = id;
-        Username = username;
-        Password = password;
-        Role = role;
-    }
+    public Guid Id { get; set; } = id;
+    public string Username { get; set; } = username;
+    public string Password { get; set; } = password;
+    public string Role { get; set; } = role;
 }

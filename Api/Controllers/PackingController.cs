@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.Queries.Packing.Handlers;
+using Application.Queries.Packing.Queries;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
 
 [ApiController]
 [Route("packing")]
-public class PackingController : ControllerBase
+public class PackingController(GetPackedProductsQueryHandler handler) : ControllerBase
 {
-    [HttpGet]
-    public IActionResult Get() => Ok("Hello World!");
+    [HttpPost]
+    public IActionResult Get([FromBody] GetPackedProductsQuery query, CancellationToken token) =>
+        Ok(handler.Handle(query));
 }

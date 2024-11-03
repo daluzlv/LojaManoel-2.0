@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 using Api.RoutingConventions;
+using Application.Queries.Packing.Handlers;
 using Domain.Factories;
 using Domain.Interfaces.Factories;
 using Domain.Interfaces.Services;
@@ -12,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Services
 builder.Services.AddScoped<IBoxFactory, BoxFactory>();
 builder.Services.AddScoped<IPackageService, PackageService>();
+builder.Services.AddScoped<GetPackedProductsQueryHandler>();
 
 builder.Services.AddControllers(options =>
 {
