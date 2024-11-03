@@ -48,10 +48,3 @@ public class Box
         AvailableSpace.AddRange(newDimensions);
     }
 }
-
-public static class BoxFactory
-{
-    public static Box CreateShortBox() => new Box(30, 40, 80);
-    public static Box CreateBox() => new Box(80, 50, 40);
-    public static Box CreateLargeBox() => new Box(50, 80, 60);
-}
