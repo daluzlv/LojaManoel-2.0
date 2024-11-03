@@ -1,16 +1,28 @@
-﻿using Domain.Dtos;
+﻿namespace Domain.Models;
 
-namespace Domain.Models;
+public class BoxSpace
+{
+    public int Length { get; set; }
+    public int Width { get; set; }
+    public int Height { get; set; }
+
+    public BoxSpace(int length, int width, int height)
+    {
+        Length = length;
+        Width = width;
+        Height = height;
+    }
+}
 
 public class Box
 {
-    private readonly List<SpaceDTO> _availableSpace;
+    private readonly List<BoxSpace> _availableSpace;
     private readonly List<Product> _products;
     public int Volume => _availableSpace.Sum(a => a.Height * a.Width * a.Length);
 
     public Box(int length, int width, int height, List<Product>? products = null)
     {
-        _availableSpace = [new SpaceDTO(length, width, height)];
+        _availableSpace = [new BoxSpace(length, width, height)];
         _products = products ?? [];
     }
 
@@ -32,18 +44,18 @@ public class Box
         return false;
     }
 
-    private static bool FitsInSpace(SpaceDTO space, int length, int width, int height) => 
+    private static bool FitsInSpace(BoxSpace space, int length, int width, int height) => 
         length <= space.Length && width <= space.Width && height <= space.Height;
 
-    private void UpdateAvailableSpace(SpaceDTO space, Product product)
+    private void UpdateAvailableSpace(BoxSpace space, Product product)
     {
-        List<SpaceDTO> newSpace = [];
+        List<BoxSpace> newSpace = [];
         if (space.Length > product.Length)
-            newSpace.Add(new SpaceDTO(space.Length - product.Length, space.Width, space.Height));
+            newSpace.Add(new BoxSpace(space.Length - product.Length, space.Width, space.Height));
         if (space.Width > product.Width)
-            newSpace.Add(new SpaceDTO(product.Length, space.Width - product.Width, space.Height));
+            newSpace.Add(new BoxSpace(product.Length, space.Width - product.Width, space.Height));
         if (space.Height > product.Height)
-            newSpace.Add(new SpaceDTO(product.Length, product.Width, space.Height - product.Height));
+            newSpace.Add(new BoxSpace(product.Length, product.Width, space.Height - product.Height));
 
         _availableSpace.Remove(space);
         _availableSpace.AddRange(newSpace);
