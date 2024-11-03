@@ -4,27 +4,27 @@ namespace Domain.Models;
 
 public class Box
 {
-    public List<SpaceDTO> AvailableSpace { get; private set; }
-    public List<Product> Products { get; set; }
-    public int Volume => AvailableSpace.Sum(a => a.Height * a.Width * a.Length);
+    private readonly List<SpaceDTO> _availableSpace;
+    private readonly List<Product> _products;
+    public int Volume => _availableSpace.Sum(a => a.Height * a.Width * a.Length);
 
     public Box(int length, int width, int height, List<Product>? products = null)
     {
-        AvailableSpace = [new SpaceDTO(length, width, height)];
-        Products = products ?? [];
+        _availableSpace = [new SpaceDTO(length, width, height)];
+        _products = products ?? [];
     }
 
     
     public bool AddProduct(Product product)
     {
         var productRotations = product.GetRotations();
-        foreach (var availableSpace in AvailableSpace)
+        foreach (var availableSpace in _availableSpace)
         {
             foreach (var (rotatedLength, rotatedWidth, rotatedHeight) in productRotations)
             {
                 if (!FitsInSpace(availableSpace, rotatedLength, rotatedWidth, rotatedHeight)) continue;
                 
-                Products.Add(product);
+                _products.Add(product);
                 UpdateAvailableSpace(availableSpace, product);
                 return true;
             }
@@ -37,15 +37,15 @@ public class Box
 
     private void UpdateAvailableSpace(SpaceDTO space, Product product)
     {
-        List<SpaceDTO> newDimensions = [];
+        List<SpaceDTO> newSpace = [];
         if (space.Length > product.Length)
-            newDimensions.Add(new SpaceDTO(space.Length - product.Length, space.Width, space.Height));
+            newSpace.Add(new SpaceDTO(space.Length - product.Length, space.Width, space.Height));
         if (space.Width > product.Width)
-            newDimensions.Add(new SpaceDTO(space.Length, space.Width - product.Width, space.Height));
+            newSpace.Add(new SpaceDTO(product.Length, space.Width - product.Width, space.Height));
         if (space.Height > product.Height)
-            newDimensions.Add(new SpaceDTO(space.Length, space.Width, space.Height - product.Height));
+            newSpace.Add(new SpaceDTO(product.Length, product.Width, space.Height - product.Height));
 
-        AvailableSpace.Remove(space);
-        AvailableSpace.AddRange(newDimensions);
+        _availableSpace.Remove(space);
+        _availableSpace.AddRange(newSpace);
     }
 }
