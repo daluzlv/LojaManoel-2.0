@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Loja_Manoel.Controllers;
+namespace Api.Controllers;
 
 [ApiController]
 [Route("packing")]

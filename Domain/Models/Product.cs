@@ -1,17 +1,11 @@
 ﻿namespace Domain;
 
-public class Product
+public class Product(int length, int height, int width)
 {
-    public int Length { get; private set; }
-    public int Height { get; private set; }
-    public int Width { get; private set; }
-
-    public Product(int length, int height, int width)
-    {
-        Length = length;
-        Height = height;
-        Width = width;
-    }
+    public int Length { get; private set; } = length;
+    public int Height { get; private set; } = height;
+    public int Width { get; private set; } = width;
+    public int Volume => Length * Height * Width;
 
     public List<(int, int, int)> GetRotations()
     {

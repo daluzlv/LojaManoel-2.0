@@ -1,10 +1,13 @@
 ﻿using Domain.Models;
 
-namespace Domain.Interfaces;
+namespace Domain.Interfaces.Factories;
 
 public interface IBoxFactory
 {
-    Box CreateBox();
+    int GetSmallBoxSize();
+    int GetMediumBoxSize();
+    int GetLargeBoxSize();
     Box CreateSmallBox();
+    Box CreateMediumBox();
     Box CreateLargeBox();
 }

@@ -12,6 +12,4 @@ public class SpaceDTO
         Width = width;
         Height = height;
     }
-    
-    
 }

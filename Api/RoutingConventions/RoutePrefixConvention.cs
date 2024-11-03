@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-namespace Loja_Manoel.RoutingConventions;
+namespace Api.RoutingConventions;
 
 public class RoutePrefixConvention(AttributeRouteModel centralPrefix) : IApplicationModelConvention
 {

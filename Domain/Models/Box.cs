@@ -6,6 +6,7 @@ public class Box
 {
     public List<SpaceDTO> AvailableSpace { get; private set; }
     public List<Product> Products { get; set; }
+    public int Volume => AvailableSpace.Sum(a => a.Height * a.Width * a.Length);
 
     public Box(int length, int width, int height, List<Product>? products = null)
     {
@@ -21,7 +22,7 @@ public class Box
         {
             foreach (var (rotatedLength, rotatedWidth, rotatedHeight) in productRotations)
             {
-                if (!FitsInDimension(availableSpace, rotatedLength, rotatedWidth, rotatedHeight)) continue;
+                if (!FitsInSpace(availableSpace, rotatedLength, rotatedWidth, rotatedHeight)) continue;
                 
                 Products.Add(product);
                 UpdateAvailableSpace(availableSpace, product);
@@ -31,7 +32,7 @@ public class Box
         return false;
     }
 
-    private static bool FitsInDimension(SpaceDTO space, int length, int width, int height) => 
+    private static bool FitsInSpace(SpaceDTO space, int length, int width, int height) => 
         length <= space.Length && width <= space.Width && height <= space.Height;
 
     private void UpdateAvailableSpace(SpaceDTO space, Product product)

@@ -1,11 +1,17 @@
-using Loja_Manoel.Middlewares;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-using Loja_Manoel.RoutingConventions;
+using Api.RoutingConventions;
+using Domain.Factories;
+using Domain.Interfaces.Factories;
+using Domain.Interfaces.Services;
+using Domain.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Services
+builder.Services.AddScoped<IBoxFactory, BoxFactory>();
+builder.Services.AddScoped<IPackageService, PackageService>();
 
 builder.Services.AddControllers(options =>
 {
@@ -17,9 +23,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-
-// Middleware para redirecionar todas as URLs para seus equivalentes em minúsculas
-app.UseLowercaseUrls();
 
 if (app.Environment.IsDevelopment())
 {
